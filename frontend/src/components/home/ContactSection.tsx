@@ -33,7 +33,7 @@ const ContactForm = () => {
       <p className="text-gray-300 text-[13px] xs:text-sm lg:text-base mb-4 sm:mb-6">
         Leave your business information below, we will contact you as soon as possible!
       </p>
-      <form className="space-y-3 xs:space-y-4 sm:space-y-5 w-full">
+      <form className="space-y-3 xs:space-y-4 sm:space-y-6 w-full">
         {contactFields.map((field, index) => (
           <InputField
             key={index}
@@ -45,7 +45,7 @@ const ContactForm = () => {
         <button
           type="submit"
           className="relative bg-[#7A73FF] hover:bg-blue-700 text-white 
-          px-4 sm:px-6 py-2 xs:py-2.5 mt-4 xs:mt-6
+          px-4 sm:px-6 py-2 xs:py-2.5 mt-5 xs:mt-6 z-50
           rounded-full h-[38px] xs:h-10 md:h-11
           w-24 xs:w-28 md:w-32
           text-[13px] xs:text-sm lg:text-base
@@ -62,7 +62,7 @@ const ContactForm = () => {
 
 const ContactQuote = () => {
   return (
-    <div className="w-full h-full flex items-center lg:col-span-8 lg:col-start-6 xl:col-span-7 xl:col-start-6 mb-6 sm:mb-8 lg:mb-0">
+    <div className="w-full h-full flex items-center lg:col-span-8 lg:col-start-7 xl:col-span-7 xl:col-start-6 mb-6 sm:mb-8 lg:mb-0">
       <div className="relative w-full h-full">
         <div className="absolute inset-0 flex items-center justify-center rounded-full 
           min-h-[400px] min-w-[400px] 
@@ -141,8 +141,8 @@ const ContactSection = () => {
       >
         <div className="max-w-[95%] sm:max-w-[90%] xl:max-w-screen-xl mx-auto h-full 
           grid grid-cols-1 lg:grid-cols-12 
-          gap-4 xs:gap-6 sm:gap-8 lg:gap-12 
-          py-6 xs:py-8 sm:py-10 lg:py-12"
+          gap-4 xs:gap-6 sm:gap-8 lg:gap-12 -mt-6
+          py-6 xs:py-8 sm:py-16 lg:pl-6 lg:py-14"
         >
           <ContactForm />
           <ContactQuote />

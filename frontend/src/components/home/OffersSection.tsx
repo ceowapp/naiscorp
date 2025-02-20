@@ -1,7 +1,7 @@
 'use client';
 
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { offers } from '@/constants/data';
 import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import { cn } from '@/lib/utils';
@@ -59,7 +59,7 @@ const OfferCard: React.FC<{ offer: OfferData; isHovered: boolean }> = ({ offer, 
     chipRefs.current = offer.chipGroups.map(group => new Array(group.length).fill(null));
   }, [offer.chipGroups]);
 
-  const getChipTransition = (groupIndex: number, chipIndex: number) => {
+  const getChipTransition = useCallback((groupIndex: number, chipIndex: number) => {
     const groupDuration = 0.8;
     const delay = groupIndex === 0 ? 0 : groupDuration * 0.2;
     const transition = {
@@ -81,43 +81,40 @@ const OfferCard: React.FC<{ offer: OfferData; isHovered: boolean }> = ({ offer, 
       }
     };
     return transition;
-  };
+  }, [isHovered]);
 
-  const calculateGroupPosition = (
+  const calculateGroupPosition = useCallback((
     group: (string | string[])[],
     groupIndex: number,
     chipIndex: number,
     dimensions: Array<Array<{ width: number; height: number }>>
   ) => {
     const VERTICAL_GAP = 40;
-    const HORIZONTAL_GAP = 20;
-    const GROUP_VERTICAL_OFFSET = 60;
+    const HORIZONTAL_GAP = 12;
+    const GROUP_VERTICAL_OFFSET = 40;
     let startY = 0;
     for (let i = 0; i < groupIndex; i++) {
       startY += (offer.chipGroups[i].length) * VERTICAL_GAP;
     }
     startY += chipIndex * VERTICAL_GAP;
     let endX = 0;
-    const currentChip = group[chipIndex];
     for (let i = 0; i < chipIndex; i++) {
-      const prevChip = group[i];
       const prevDimension = dimensions[groupIndex]?.[i];
-      
       if (prevDimension) {
         endX += prevDimension.width + HORIZONTAL_GAP;
       }
     }
     return {
       start: { x: 0, y: startY },
-      end: { x: endX, y: groupIndex * GROUP_VERTICAL_OFFSET + 90 }
+      end: { x: endX, y: groupIndex * GROUP_VERTICAL_OFFSET + 80 }
     };
-  };
+  }, [offer.chipGroups]);
  
   return (
     <motion.div
       className={cn(
         "relative rounded-lg flex w-full overflow-hidden flex-col items-start justify-start shadow-md h-[450px]",
-        "p-3 xs:p-4 sm:p-5 md:p-6 lg:p-7 xl:p-8"
+        "p-8 xs:p-4 sm:p-4 md:p-4 lg:p-4 xl:p-5"
       )}
       style={{ backgroundColor: offer.color }}
       animate={{ opacity: isHovered ? 1 : 0.8 }}
@@ -142,9 +139,9 @@ const OfferCard: React.FC<{ offer: OfferData; isHovered: boolean }> = ({ offer, 
       />
       <div className="relative z-10 flex flex-col h-full">
         <h3 className={cn(
-          "text-[#0A2540] font-medium mb-2",
+          "text-[#0A2540] font-semibold mb-2",
           "w-[180px] xs:w-[200px] sm:w-[220px] md:w-[240px] lg:w-[260px]",
-          "text-base xs:text-base sm:text-sm md:text-md lg:text-lg"
+          "text-base xs:text-base sm:text-md xl:text-md"
         )}>
           {offer.title}
         </h3>
@@ -165,8 +162,8 @@ const OfferCard: React.FC<{ offer: OfferData; isHovered: boolean }> = ({ offer, 
                 <motion.p
                   className={cn(
                     "text-[#6D6D6D] line-clamp-3 text-clip",
-                    "text-xs xs:text-sm sm:text-base md:text-md",
-                    "sm:w-[350px] w-[250px]"
+                    "text-xs xs:text-sm sm:text-base md:text-sm",
+                    "xl:w-[400px] lg:w-[400px] md:w-[400px] sm:w-[300px] w-[400px]"
                   )}
                   style={{
                     display: '-webkit-box',
@@ -180,7 +177,7 @@ const OfferCard: React.FC<{ offer: OfferData; isHovered: boolean }> = ({ offer, 
             )}
           </AnimatePresence>
           <AnimatePresence mode="wait">
-            <div className="relative h-[200px] z-50">
+            <div className="relative max-h-full z-50">
               {offer.chipGroups.map((group, groupIndex) => (
                 <div key={groupIndex} className="absolute w-full">
                   {group.map((chip, chipIndex) => {
@@ -190,7 +187,7 @@ const OfferCard: React.FC<{ offer: OfferData; isHovered: boolean }> = ({ offer, 
                       return (
                         <motion.div
                           key={`group-${groupIndex}-${chipIndex}`}
-                          className="absolute flex gap-2"
+                          className="absolute flex gap-1"
                           initial={false}
                           animate={{
                             x: isHovered ? groupPosition.end.x : groupPosition.start.x,
@@ -299,7 +296,6 @@ const OffersSection: React.FC<> = () => {
           hoveredIndex={hoveredIndex}
           withSlideIndicator
           isHoverEffect
-          isInfinite
         />
       </div>
     </section>
@@ -308,4 +304,4 @@ const OffersSection: React.FC<> = () => {
 
 OffersSection.displayName = 'OffersSection';
 
-export default OffersSection;
+export default React.memo(OffersSection);

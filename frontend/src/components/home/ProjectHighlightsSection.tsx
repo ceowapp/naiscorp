@@ -64,4 +64,4 @@ const ProjectHighlightsSection = () => {
 
 ProjectHighlightsSection.displayName = 'ProjectHighlightsSection';
 
-export default ProjectHighlightsSection;
+export default React.memo(ProjectHighlightsSection);

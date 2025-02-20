@@ -29,7 +29,7 @@ const ImageFrame: React.FC<ImageFrameProps> = ({
   showBlur = true,
 }) => {
   return (
-    <div className={cn("relative aspect-square w-full max-h-[60vh]", className)}>
+    <div className={cn("relative aspect-square w-full max-w-[60vh] max-h-[60vh]", className)}>
       <div className="absolute inset-0 overflow-hidden rounded-3xl shadow-xl">
         <div className="relative w-full h-full">
           {videoUrl && (
@@ -91,7 +91,7 @@ const SolutionsSection: React.FC = () => {
   return (
     <section className="pt-[150px] sm:pt-[180px] md:pt-[210px] lg:pt-[240px] pb-8 sm:pb-12 md:pb-16 lg:pb-20 bg-white">
       <div className="mx-auto px-4 sm:px-6 lg:px-8 max-w-screen-xl">
-        <div className="flex flex-col lg:flex-row gap-8 sm:gap-12 lg:gap-16">
+        <div className="flex flex-col md:flex-row gap-8 sm:gap-12 lg:gap-16">
           <div className="w-full lg:flex-1 order-1 lg:order-1">
             <h2 className="text-start text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-2">
               Summary of
@@ -99,7 +99,7 @@ const SolutionsSection: React.FC = () => {
             <h2 className="text-start text-3xl sm:text-4xl md:text-5xl font-bold bg-[linear-gradient(88.18deg,_#0945EB_0%,_#67D1FF_77.46%)] bg-clip-text text-transparent mb-6 sm:mb-8">
               Naiscorp's solutions
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 sm:gap-x-6 lg:gap-x-8 gap-y-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-4 sm:gap-x-6 lg:gap-x-8 gap-y-4">
               <SolutionList solutions={leftSolutions} offset={0} />
               <SolutionList solutions={rightSolutions} offset={midPoint} />
             </div>
@@ -122,4 +122,4 @@ const SolutionsSection: React.FC = () => {
 
 SolutionsSection.displayName = 'SolutionsSection';
 
-export default SolutionsSection;
+export default React.memo(SolutionsSection);

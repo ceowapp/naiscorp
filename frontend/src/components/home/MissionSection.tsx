@@ -1,3 +1,4 @@
+import React from 'react';
 import Image from "next/image";
 import { whyItems, infoData } from '@/constants/data';
 import SkewedGroup from '../shared/SkewedGroup';
@@ -100,7 +101,7 @@ const WhyItMatters: React.FC = () => {
 const MissionHeader = () => {
   return (
     <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-start items-start p-4 sm:p-6 pt-16 sm:pt-24 md:pt-32">
-      <h1 className="text-xl sm:text-3xl md:text-4xl lg:text-6xl font-bold bg-gradient-to-r from-[#4583FF] to-[#BAEAFF] bg-clip-text text-transparent">
+      <h1 className="text-xl sm:text-3xl md:text-4xl lg:text-6xl font-bold bg-gradient-to-r from-[#4583FF] to-[#BAEAFF] bg-clip-text text-transparent [text-shadow:0px 4px 24px 0px #00000040]">
         Sustainability and Innovation
       </h1>
       <p className="text-white mt-2 sm:mt-4 text-sm sm:text-base md:text-lg max-w-2xl text-start">
@@ -174,6 +175,6 @@ const MissionSection = () => {
 
 MissionSection.displayName = 'MissionSection';
 
-export default MissionSection;
+export default React.memo(MissionSection);
 
 

@@ -4,11 +4,11 @@ import React from 'react';
 const HeroBanner: React.FC = () => {
   return (
     <div className="absolute w-full h-full pt-32 sm:pt-32 md:pt-32 lg:pt-40 bg-opacity-50 flex flex-col items-center justify-start">
-      <div className="w-[90%] sm:w-[85%] md:w-[75%] lg:w-2/3 px-4">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-[#D1FBFF] via-[#6AA0FF] to-[#89FBFF] text-transparent bg-clip-text">
+      <div className="w-full sm:w-[50%] md:w-[50%] lg:w-[60%] xl:w-[40%] px-4">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold bg-gradient-to-r from-[#D1FBFF] via-[#6AA0FF] to-[#89FBFF] text-transparent bg-clip-text [text-shadow:0_4px_24px_0px_#040B3080]">
           Compute Future
         </h1>
-        <p className="text-gray-300 mt-2 sm:mt-3 md:mt-4 text-xl sm:text-2xl md:text-3xl lg:text-4xl">
+        <p className="text-gray-300 mt-2 sm:mt-3 md:mt-4 text-sm sm:text-lg md:text-xl lg:text-2xl">
           Creating the best values of technologies in daily lives and fostering disruptive innovations
         </p>
       </div>
@@ -36,4 +36,4 @@ const HeroSection: React.FC = () => {
 
 HeroSection.displayName = 'HeroSection';
 
-export default HeroSection;
+export default React.memo(HeroSection);

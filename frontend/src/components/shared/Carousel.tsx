@@ -53,7 +53,7 @@ export const Carousel: React.FC<CarouselProps> = ({
   itemClassName = "",
   navigationButtons,
   isHoverEffect = false,
-  isInfinite = true,
+  isInfinite = false,
   containerWidth = "max-w-screen-xl",
   setHoveredIndex,
   hoveredIndex,
@@ -61,7 +61,7 @@ export const Carousel: React.FC<CarouselProps> = ({
   const carouselRef = useRef<HTMLDivElement>(null);
   const dimensionsCacheRef = useRef<Map<number, CachedDimensions>>(new Map());
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isAtStart, setIsAtStart] = useState(true);
+  const [isAtStart, setIsAtStart] = useState(false);
   const [isAtEnd, setIsAtEnd] = useState(false);
   const [currentBreakpoint, setCurrentBreakpoint] = useState(responsive[0].breakpoint);
   const [dimensions, setDimensions] = useState<CachedDimensions>({
@@ -104,7 +104,9 @@ export const Carousel: React.FC<CarouselProps> = ({
     setDimensions(newDimensions);
     if (!isInitialized) {
       if (isInfinite) {
-        const initialScrollPosition = newDimensions.itemWidth * items.length;
+        const totalItems = extendedItems.length;
+        const middleIndex = Math.floor(totalItems / 2);
+        const initialScrollPosition = middleIndex * (newDimensions.itemWidth + newDimensions.gap);
         carouselRef.current.scrollLeft = initialScrollPosition;
       }
       setIsInitialized(true);
@@ -168,6 +170,8 @@ export const Carousel: React.FC<CarouselProps> = ({
     const scrollLeft = carouselRef.current.scrollLeft;
     const containerWidth = carouselRef.current.offsetWidth;
     const scrollWidth = carouselRef.current.scrollWidth;
+    setIsAtStart(scrollLeft <= 0);
+    setIsAtEnd(Math.ceil(scrollLeft + containerWidth) >= scrollWidth);
   }, [dimensions, items.length, isInfinite, repetitions, isInitialized]);
 
   const scroll = useCallback((direction: 'left' | 'right') => {
@@ -201,7 +205,7 @@ export const Carousel: React.FC<CarouselProps> = ({
         )}
         <div
           ref={carouselRef}
-          className="flex scroll-smooth justify-start items-center w-full overflow-x-auto no-scrollbar mx-6 sm:mx-10"
+          className="flex scroll-smooth justify-start items-center w-full overflow-x-auto no-scrollbar mx-10"
           style={{ 
               gap: `${dimensions.gap}px`,
               scrollSnapType: 'x mandatory',
@@ -226,7 +230,6 @@ export const Carousel: React.FC<CarouselProps> = ({
             </motion.div>
           ))}
         </div>
-
         {(isInfinite || !isAtEnd) && isInitialized && (
           <button
             onClick={() => scroll('right')}
@@ -257,4 +260,4 @@ export const Carousel: React.FC<CarouselProps> = ({
   );
 };
 
-export default Carousel;
+export default React.memo(Carousel);

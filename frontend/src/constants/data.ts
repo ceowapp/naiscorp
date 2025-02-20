@@ -63,7 +63,7 @@ export const offers = [
     }
   },
   { 
-    title: 'Investment & Incubation', 
+    title: 'Investment', 
     description: 'Access high-performance computing solutions and real-time systems, backed by sophisticated data analytics and middleware integration for optimal business growth.',
     image: '/images/offer-3.png',
     color: '#E0FFE0',
@@ -135,83 +135,6 @@ export const offers = [
       1: [
         { start: { x: 0, y: 80 }, end: { x: 0, y: 40 } },
         { start: { x: 0, y: 120 }, end: { x: 160, y: 40 } }
-      ]
-    }
-  },
-  { 
-    title: 'Applied AI Solutions', 
-    description: 'Harness the power of artificial intelligence with our comprehensive AI solutions, including machine learning, natural language processing, and computer vision applications.',
-    image: '/images/offer-2.png',
-    color: '#CCE5FF',
-    chipGroups: [
-      ['ML', 'NLP'],
-      ['Computer Vision', 'AI']
-    ],
-    chipPositions: {
-      0: [
-        { start: { x: 0, y: 0 }, end: { x: 0, y: 0 } },
-        { start: { x: 0, y: 40 }, end: { x: 120, y: 0 } }
-      ],
-      1: [
-        { start: { x: 0, y: 80 }, end: { x: 0, y: 40 } },
-        { start: { x: 0, y: 120 }, end: { x: 140, y: 40 } }
-      ]
-    }
-  },
-  { 
-    title: 'Investment & Incubation', 
-    description: `Accelerate your startup's growth with our investment and incubation programs, providing funding opportunities and strategic guidance for sustainable development.`,
-    image: '/images/offer-2.png',
-    color: '#E0FFE0',
-    chipGroups: [
-      ['Startup', 'Funding'],
-      ['Growth']
-    ],
-    chipPositions: {
-      0: [
-        { start: { x: 0, y: 0 }, end: { x: 0, y: 0 } },
-        { start: { x: 0, y: 40 }, end: { x: 140, y: 0 } }
-      ],
-      1: [
-        { start: { x: 0, y: 80 }, end: { x: 0, y: 40 } }
-      ]
-    }
-  },
-  { 
-    title: 'Smart Robotics', 
-    description: 'Transform your operations with IoT-enabled smart robotics solutions, featuring advanced automation capabilities and seamless hardware integration.',
-    image: '/images/offer-2.png',
-    color: '#FFF0F0',
-    chipGroups: [
-      ['IoT', 'Automation'],
-      ['Hardware']
-    ],
-    chipPositions: {
-      0: [
-        { start: { x: 0, y: 0 }, end: { x: 0, y: 0 } },
-        { start: { x: 0, y: 40 }, end: { x: 160, y: 0 } }
-      ],
-      1: [
-        { start: { x: 0, y: 80 }, end: { x: 0, y: 40 } }
-      ]
-    }
-  },
-  { 
-    title: 'Insurtech', 
-    description: 'Modernize your insurance operations with digital solutions that streamline claims processing, enhance risk assessment, and improve customer experience.',
-    image: '/images/offer-2.png',
-    color: '#F0F0FF',
-    chipGroups: [
-      ['Insurance', 'Claims'],
-      ['Risk']
-    ],
-    chipPositions: {
-      0: [
-        { start: { x: 0, y: 0 }, end: { x: 0, y: 0 } },
-        { start: { x: 0, y: 40 }, end: { x: 140, y: 0 } }
-      ],
-      1: [
-        { start: { x: 0, y: 80 }, end: { x: 0, y: 40 } }
       ]
     }
   }

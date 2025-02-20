@@ -70,7 +70,7 @@ const baseScreenConfigs: ScreenConfig[] = [
     itemsPerView: 2,
     gap: 8,
     containerWidthPercent: 72,
-    expandedWidthPercent: 180
+    expandedWidthPercent: 170
   },
   {
     breakpoint: 1024,
@@ -103,13 +103,13 @@ export const Carousel: React.FC<CarouselProps> = ({
   navigationButtons,
   isHoverEffect = false,
   withSlideIndicator = false,
-  isInfinite = true,
+  isInfinite = false,
   setHoveredIndex,
   hoveredIndex,
 }) => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isAtStart, setIsAtStart] = useState(true);
+  const [isAtStart, setIsAtStart] = useState(false);
   const [isAtEnd, setIsAtEnd] = useState(false);
   const [currentConfig, setCurrentConfig] = useState<CalculatedConfig>();
 
@@ -121,7 +121,7 @@ export const Carousel: React.FC<CarouselProps> = ({
     const containerWidth = (screenWidth * baseConfig.containerWidthPercent) / 100;
     const totalGapWidth = baseConfig.gap * (baseConfig.itemsPerView - 1);
     const itemWidth = Math.floor(
-      (containerWidth - totalGapWidth - 160) / baseConfig.itemsPerView
+      (containerWidth - totalGapWidth - 100) / baseConfig.itemsPerView
     );
     let expandedWidth;
     if (baseConfig.expandedWidthPercent < 0) {
@@ -267,7 +267,7 @@ export const Carousel: React.FC<CarouselProps> = ({
     };
   }, [currentConfig, hoveredIndex, isHoverEffect, items.length]);
 
-  const getContainerStyle = () => {
+  const getContainerStyle = useCallback(() => {
     if (!currentConfig || !isHoverEffect || hoveredIndex === null) {
       return {
         width: currentConfig?.containerWidth,
@@ -276,14 +276,14 @@ export const Carousel: React.FC<CarouselProps> = ({
       };
     }
     const { itemWidth, expandedWidth } = currentConfig;
-    const extentedWidth = expandedWidth - itemWidth;
+    const extendedWidth = expandedWidth - itemWidth;
     return {
-      width: `calc(${currentConfig.containerWidth} + ${extentedWidth}px)`,
+      width: `calc(${currentConfig.containerWidth} + ${extendedWidth}px)`,
       willChange: 'transform',
       transformOrigin: 'center',
       transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
     };
-  };
+  }, [currentConfig, isHoverEffect, hoveredIndex]);
 
   if (!currentConfig) return null;
 
@@ -374,4 +374,4 @@ export const Carousel: React.FC<CarouselProps> = ({
   );
 };
 
-export default Carousel;
+export default React.memo(Carousel);

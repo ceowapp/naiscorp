@@ -1,6 +1,6 @@
 'use client';
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { services } from '@/constants/data';
 import Carousel from '../shared/Carousel';
 import Image from 'next/image';
@@ -43,4 +43,4 @@ const SolutionsIntersection: React.FC = () => {
 
 SolutionsIntersection.displayName = 'SolutionsIntersection';
 
-export default SolutionsIntersection;
+export default React.memo(SolutionsIntersection);
