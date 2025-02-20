@@ -116,8 +116,7 @@ const OfferCard: React.FC<{ offer: OfferData; isHovered: boolean }> = ({ offer, 
   return (
     <motion.div
       className={cn(
-        "relative rounded-lg flex w-full overflow-hidden flex-col items-start justify-start shadow-md",
-        "h-[250px] xs:h-[280px] sm:h-[320px] md:h-[360px] lg:h-[400px] xl:h-[420px] 2xl:h-[450px]",
+        "relative rounded-lg flex w-full overflow-hidden flex-col items-start justify-start shadow-md h-[450px]",
         "p-3 xs:p-4 sm:p-5 md:p-6 lg:p-7 xl:p-8"
       )}
       style={{ backgroundColor: offer.color }}
@@ -167,7 +166,7 @@ const OfferCard: React.FC<{ offer: OfferData; isHovered: boolean }> = ({ offer, 
                   className={cn(
                     "text-[#6D6D6D] line-clamp-3 text-clip",
                     "text-xs xs:text-sm sm:text-base md:text-md",
-                    "w-[200px] xs:w-[250px] sm:w-[300px] md:w-[350px] lg:w-[350px]"
+                    "sm:w-[350px] w-[250px]"
                   )}
                   style={{
                     display: '-webkit-box',
@@ -288,7 +287,7 @@ const OffersSection: React.FC<> = () => {
   }));
   return (
     <section className="w-full m-0 p-0">
-      <div className="relative flex flex-col items-center justify-center bg-white p-4 sm:p-8 overflow-hidden">
+      <div className="relative flex flex-col items-center justify-center bg-white p-4 sm:p-0 overflow-hidden">
         <OfferHeader />
         <Carousel 
           items={extendedFeatures}
