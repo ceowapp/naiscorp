@@ -253,7 +253,7 @@ export const Carousel: React.FC<CarouselProps> = ({
     const scrollAmount = itemTotalWidth * Math.floor(itemsPerView / 2);
     const currentScroll = carouselRef.current.scrollLeft;
     const maxScroll = carouselRef.current.scrollWidth - carouselRef.current.clientWidth;
-    let newScrollPosition = direction === 'left' 
+    const newScrollPosition = direction === 'left' 
       ? currentScroll - scrollAmount 
       : currentScroll + scrollAmount;
     carouselRef.current.scrollTo({

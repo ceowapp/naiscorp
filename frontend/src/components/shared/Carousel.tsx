@@ -178,7 +178,7 @@ export const Carousel: React.FC<CarouselProps> = ({
     const itemsToScroll = Math.max(1, Math.floor(visibleItems / 2));
     const scrollAmount = itemTotalWidth * itemsToScroll;
     const currentScroll = carouselRef.current.scrollLeft;
-    let newScrollLeft = currentScroll + (direction === 'left' ? -scrollAmount : scrollAmount);
+    const newScrollLeft = currentScroll + (direction === 'left' ? -scrollAmount : scrollAmount);
     carouselRef.current.scrollTo({
       left: newScrollLeft,
       behavior: 'smooth'
