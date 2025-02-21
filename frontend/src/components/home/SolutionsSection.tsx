@@ -106,7 +106,7 @@ const SolutionsSection: React.FC = () => {
           </div>
           <div className="order-2 lg:order-2 w-full lg:w-[450px] xl:w-[500px] justify-start items-start flex">
             <ImageFrame
-              videoUrl="https://res.cloudinary.com/dc0pcnmqx/video/upload/v1739766621/particle-dot_jhdejl.mp4"
+              videoUrl="/videos/particle-dot.mp4"
               imageUrl="/images/ai-robot.png"
               alt="Naiscorp Solutions"
               imagePosition="left"

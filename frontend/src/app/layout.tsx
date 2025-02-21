@@ -1,4 +1,3 @@
-'use client'
 import React from "react";
 import localFont from "next/font/local";
 import Head from "next/head";
@@ -32,7 +31,7 @@ const metadata = {
     siteName: 'NaisCorp',
     images: [
       {
-        url: '/global/app_logos/apple-icon.jpg',
+        url: '/images/logo.png',
         width: 1200,
         height: 630,
       }
@@ -51,7 +50,6 @@ const metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  useWebVitals(reportWebVitals);
   return (
     <html lang="en" suppressHydrationWarning>
       <Head>

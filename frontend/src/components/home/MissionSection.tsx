@@ -141,7 +141,7 @@ const MissionSection = () => {
           preload="auto"
           playsInline
         >
-          <source src="https://res.cloudinary.com/dc0pcnmqx/video/upload/v1739766628/technology-futuristic_fllamr.mp4" type="video/mp4" />
+          <source src="/videos/technology-futuristic.mp4" type="video/mp4" />
         </video>
         <MissionHeader />
       </div>

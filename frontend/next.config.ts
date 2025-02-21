@@ -9,17 +9,48 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 const nextConfig: NextConfig = {
   experimental: {
     webVitalsAttribution: ['CLS', 'LCP', 'FCP', 'FID', 'TTFB'],
+    optimizeCss: true,
+    scrollRestoration: true,
     turbo: {
       resolveAlias: {
         canvas: './empty-module.ts',
       },
     },
   },
+  async headers() {
+    return [
+      {
+        source: "/_next/static/:path*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
+      },
+      {
+        source: "/video/:path*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=604800, immutable" },
+        ],
+      },
+      {
+        source: "/_next/image",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
+      },
+    ];
+  },
+  compiler: {
+    styledComponents: true,
+  },
   images: {
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'images.unsplash.com'
+      },
+      {
+        protocol: 'https',
+        hostname: 'naiscorp.vercel.app',
       },
       {
         protocol: 'https',
@@ -71,6 +102,9 @@ const nextConfig: NextConfig = {
       test: /\.wasm$/,
       type: 'webassembly/async',
     });
+    config.optimization.splitChunks = {
+      chunks: "all",
+    };
     if (!isServer) {
       config.output.environment = { ...config.output.environment, asyncFunction: true };
       config.output.webassemblyModuleFilename = 'static/wasm/[modulehash].wasm';
