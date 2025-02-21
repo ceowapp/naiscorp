@@ -1,11 +1,12 @@
 import React from "react";
 import localFont from "next/font/local";
 import Head from "next/head";
+import { Metadata } from 'next'
+import GoogleAnalyticsProvider from '@/components/GoogleAnalyticsProvider'
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import { ApolloProvider } from "@/providers/ApolloProvider";
 import { reportWebVitals } from '@/lib/vitals';
 import { useWebVitals } from '@/hooks/useWebVitals';
-import Script from "next/script";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -20,14 +21,14 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
-const metadata = {
+export const metadata: Metadata = {
   title: "NaisCorp",
   description: "NaisCorp website.",
-  metadataBase: new URL('https://example.com'),
+  metadataBase: new URL('https://naiscorp.vercel.app'),
   openGraph: {
     title: "NaisCorp",
     description: "The connected workspace where better, faster work happens.",
-    url: 'https://example.com',
+    url: 'https://naiscorp.vercel.app',
     siteName: 'NaisCorp',
     images: [
       {
@@ -39,6 +40,12 @@ const metadata = {
     locale: 'en_US',
     type: 'website',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: "NaisCorp",
+    description: "The connected workspace where better, faster work happens.",
+    images: ['/images/logo.png'],
+  },
   icons: {
     icon: [
       { url: "/global/app_logos/favicon.ico", media: "(prefers-color-scheme: light)" },
@@ -47,12 +54,12 @@ const metadata = {
     apple: "/global/app_logos/apple-icon.jpg",
     shortcut: "/global/app_logos/icon.jpg",
   },
-};
+}
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <Head>
+      <head>
         <title>{metadata.title}</title>
         <meta name="description" content={metadata.description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -71,20 +78,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="apple-touch-icon" href={metadata.icons.apple} />
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="canonical" href="https://shopify-app.doc2product.com" />
-        <Script 
-          async 
-          strategy="afterInteractive"
-          src="https://www.googletagmanager.com/gtag/js?id=G-9VCKN3KBJJ"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-9VCKN3KBJJ');
-          `}
-        </Script>
-      </Head>
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <React.StrictMode>
           <ApolloProvider>
@@ -98,6 +92,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 {children}
             </ThemeProvider>
           </ApolloProvider>
+          <GoogleAnalyticsProvider />
         </React.StrictMode>
       </body>
     </html>
